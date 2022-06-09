@@ -1,17 +1,16 @@
-import requests
 
 
-def test_ping():
-    res = requests.get('http://localhost:8000/ping')
+def test_ping(myserver):
+    res = myserver.get('/ping')
     assert res.text == 'pong'
 
 
-def test_pong():
-    res = requests.get('http://localhost:8000/pong')
+def test_pong(myserver):
+    res = myserver.get('/pong')
     assert res.text == 'ping'
 
 
-def test_hello():
+def test_hello(myserver):
     name = 'John'
-    res = requests.get(f'http://localhost:8000/hello/{name}')
+    res = myserver.get(f'/hello/{name}')
     assert res.text == f'Hello {name}!'
