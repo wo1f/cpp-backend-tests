@@ -14,3 +14,9 @@ def test_hello(myserver):
     name = 'John'
     res = myserver.get(f'/hello/{name}')
     assert res.text == f'Hello {name}!'
+
+
+def test_goodbye(myserver):
+    name = 'John'
+    res = myserver.get(f'/goodbye/{name}')
+    assert res.text == f'Goodbye {name}!'
