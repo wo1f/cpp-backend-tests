@@ -17,7 +17,7 @@ class Server:
         return requests.post(urljoin(self.url, endpoint), data)
 
 
-@pytest.fixture
+@pytest.fixture(scope='module')
 def myserver(xprocess):
     class Starter(ProcessStarter):
         pattern = 'Running on'
