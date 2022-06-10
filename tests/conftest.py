@@ -1,9 +1,11 @@
 import os
 import pytest
+import requests
+
 from xprocess import ProcessStarter
 from dataclasses import dataclass
-import requests
 from urllib.parse import urljoin
+from pathlib import Path
 
 
 @dataclass
@@ -19,9 +21,12 @@ class Server:
 
 @pytest.fixture(scope='module')
 def myserver(xprocess):
+    path = os.environ['DELIVERY_APP']
+    if not Path(path).exists():
+        raise Exception(f"no such file {os.environ['DELIVERY_APP']=}")
+
     class Starter(ProcessStarter):
         pattern = 'Running on'
-        path = os.environ['DELIVERY_APP']
         args = ['python3', path]
 
     logfile = xprocess.ensure("myserver", Starter)
