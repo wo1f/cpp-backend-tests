@@ -29,8 +29,8 @@ def myserver(xprocess):
         pattern = 'Running on'
         args = ['python3', path]
 
-    logfile = xprocess.ensure("myserver", Starter)
-    print(logfile)
+    xprocess.ensure("myserver", Starter)
+
     yield Server('http://localhost:8000/')
 
     xprocess.getinfo("myserver").terminate()
